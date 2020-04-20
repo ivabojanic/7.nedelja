@@ -236,6 +236,6 @@ int main()
     T1.naostri();
     T1.naostri();
     T1.ispisi();
-    return 0;
+        
     return 0;
 }
