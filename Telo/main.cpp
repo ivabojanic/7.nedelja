@@ -3,10 +3,13 @@
 using namespace std;
 class Telo
 {
+protected:
+    double povrsina;
+    double zapremina;
 public:
     virtual double Povrsina() = 0;
     virtual double Zapremina() = 0;
-    virtual void ispisi()= 0;
+    virtual void ispisi()=0;
 };
 class Kvadar : public Telo
 {
@@ -26,13 +29,13 @@ public:
 
     double Zapremina()
     {
-        double Z = a*b*c;
-        return Z;
+        zapremina = a*b*c;
+        return zapremina;
     }
     double Povrsina()
     {
-        double P = 2*(a*b + a*c + b*c);
-        return P;
+        povrsina = 2*(a*b + a*c + b*c);
+        return povrsina;
     }
     void ispisi()
     {
@@ -55,13 +58,13 @@ public:
 
     double Zapremina()
     {
-        double Z = pow(a,2)*sqrt(pow(h,2)-pow(a/2,2))/3;
-        return Z;
+        zapremina = pow(a,2)*sqrt(pow(h,2)-pow(a/2,2))/3;
+        return zapremina;
     }
     double Povrsina()
     {
-        double P = pow(a,2)+4*(a*h/2);
-        return P;
+        povrsina = pow(a,2)+4*(a*h/2);
+        return povrsina;
     }
     void ispisi()
     {
@@ -75,22 +78,6 @@ public:
     Kocka(double stranica){a = stranica; b = stranica; c = stranica;}
     Kocka(const Kocka &K){a = K.a; b = K.b; c = K.c;}
     ~Kocka(){}
-    double getStranicaA()const{return a;}
-
-    double Zapremina()
-    {
-        double Z = pow(a,3);
-        return Z;
-    }
-    double Povrsina()
-    {
-        double P = pow(a,2)*6;
-        return P;
-    }
-    void ispisi()
-    {
-        cout<<getStranicaA()<<","<<Zapremina()<<","<<Povrsina()<<endl;
-    }
 };
 class JSPiramida : public Piramida
 {
@@ -99,43 +86,27 @@ public:
     JSPiramida(double stranica, double visina){a = stranica; h = visina;}
     JSPiramida(const JSPiramida &jsp){a = jsp.a; h = jsp.h;}
     ~JSPiramida(){}
-    double getStranicaA()const{return a;}
-    double getVisinu()const{return h;}
-    double Zapremina()
-    {
-        double Z = pow(a,2)*sqrt(pow(h,2)-pow(a/2,2))/3;
-        return Z;
-    }
-    double Povrsina()
-    {
-        double P = pow(a,2)+4*(a*h/2);
-        return P;
-    }
-    void ispisi()
-    {
-        cout<<getStranicaA()<<","<<getVisinu()<<","<<Zapremina()<<","<<Povrsina()<<endl;
-    }
 };
-class specTelo
+class specTelo : Telo
 {
 private:
     Kocka K;
     JSPiramida P;
 public:
-    specTelo() : K(2.00),P(2.00){}
-    specTelo(double stranica) : K(stranica),P(stranica){}
+    specTelo() : K(2.00),P(2.00, 4.00){}
+    specTelo(double stranica, double visina) : K(stranica),P(stranica, visina){}
     specTelo(const specTelo &s) : K(s.K),P(s.P){}
     ~specTelo(){}
 
     double Zapremina()
     {
-        double Z = K.Zapremina() + 2*P.Zapremina();
-        return Z;
+        zapremina = K.Zapremina() + 2*P.Zapremina();
+        return zapremina;
     }
     double Povrsina()
     {
-        double P = (2*(P.Povrsina() - pow(P.getStranicaA(),2)) + 4*pow(K.getStranicaA(),2);
-        return P;
+        povrsina = 2*(P.Povrsina() - pow(P.getStranicaA(),2)) + 4*pow(K.getStranicaA(),2);
+        return povrsina;
     }
     void ispisi()
     {
@@ -144,6 +115,39 @@ public:
 };
 int main()
 {
-    cout << "Hello world!" << endl;
+    Kvadar K;
+    Kvadar K1(5.00,6.00,7.00);
+    Kvadar K2(K);
+    K.ispisi();
+    K1.ispisi();
+    K2.ispisi();
+
+    Piramida P;
+    Piramida P1(7.00,10.00);
+    Piramida P2(P);
+    P.ispisi();
+    P1.ispisi();
+    P2.ispisi();
+
+    Kocka O;
+    Kocka O1(5.00);
+    Kocka O2(O);
+    K.ispisi();
+    K1.ispisi();
+    K2.ispisi();
+
+    JSPiramida S;
+    JSPiramida S1(2.00,1.71);
+    JSPiramida S2(S);
+    S.ispisi();
+    S1.ispisi();
+    S2.ispisi();
+
+    specTelo T;
+    specTelo T1(8.00,6.84);
+    specTelo T2(T);
+    T.ispisi();
+    T1.ispisi();
+    T2.ispisi();
     return 0;
 }

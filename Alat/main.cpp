@@ -216,6 +216,26 @@ public:
 };
 int main()
 {
-    cout << "Hello world!" << endl;
+    Cekic C;
+    Cekic C1(300,9,"Cekicara Pezos","00569");
+    Cekic C2(C);
+    C.ispisi();
+    C1.ispisi();
+    C2.ispisi();
+    C1.Upotrebi();
+    C1.ispisi();
+
+    Testera T;
+    Testera T1(0.5,"Testerara Pezos","999856");
+    Testera T2(T);
+    T.ispisi();
+    T1.ispisi();
+    T2.ispisi();
+    T1.Upotrebi();
+    T1.ispisi();
+    T1.naostri();
+    T1.naostri();
+    T1.ispisi();
+    return 0;
     return 0;
 }
